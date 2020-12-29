@@ -26,7 +26,7 @@ function App() {
 	}, []);
 	return (
 		<div className="App">
-			<h1>BWD project is ready</h1>
+			<h1>BWD project</h1>
 			<OrderTable data={state.data} />
 		</div>
 	);
