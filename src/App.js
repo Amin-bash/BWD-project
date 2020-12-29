@@ -6,10 +6,11 @@ function App() {
   const [state, setState] = useState({
     data: []
   })
-  const API = "http://51.15.242.149:8585/orders?status=active";
+
+  const APIOrders = "http://51.15.242.149:8585/orders?status=active";
   useEffect(() => {
 
-    fetch(API)
+    fetch(APIOrders)
       .then(res => res.json())
       .then(
         (result) => {
