@@ -7,7 +7,7 @@ function App() {
 		data: []
 	});
 
-	const APIOrders = 'http://51.15.242.149:8585/orders?status=active';
+	const APIOrders = 'https://51.15.242.149:8585/orders?status=active';
 	useEffect(() => {
 		// get orders
 		fetch(APIOrders).then((res) => res.json()).then(
