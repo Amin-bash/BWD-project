@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import OrderTable from './components/Table';
-import axios from 'axios';
 
 
 function App() {
