@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import './App.scss';
+import OrderTable from "./components/Table";
 
 function App() {
+  const [state, setState] = useState({
+    data: []
+  })
+  const API = "http://51.15.242.149:8585/orders?status=active";
+  useEffect(() => {
+
+    fetch(API)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setState(prevState => {
+            prevState.data = result;
+            return {...prevState}
+          })
+          console.log(state.data);
+
+        },
+        (error) => {
+         console.log(error);
+        }
+      )
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>BWD project is ready</h1>
+      <OrderTable data={state.data} />
     </div>
   );
 }
