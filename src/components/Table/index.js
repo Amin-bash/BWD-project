@@ -35,11 +35,13 @@ const OrderTable = (props) => {
             <TableCell align="right">Nr</TableCell>
             <TableCell align="right">Create Date</TableCell>
             <TableCell align="right">Side</TableCell>
+            <TableCell align="right">Exec Type</TableCell>
             <TableCell align="right">Open Price</TableCell>
             <TableCell align="right">Close Price</TableCell>
             <TableCell align="right">Quantity</TableCell>
             <TableCell align="right">Amount</TableCell>
             <TableCell align="right">Convert Sell Date</TableCell>
+            <TableCell align="right">Closed Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,11 +50,13 @@ const OrderTable = (props) => {
               <TableCell align="right">{i + 1}</TableCell>
               <TableCell align="right">{row.created_at}</TableCell>
               <TableCell align="right">{row.side}</TableCell>
+              <TableCell align="right">{row.open_type} / {row.close_type}</TableCell>
               <TableCell align="right">{parseFloat(row.open_ppu).toFixed(props.pricePrecision)}</TableCell>
               <TableCell align="right">{parseFloat(row.close_ppu).toFixed(props.pricePrecision)}</TableCell>
               <TableCell align="right">{parseFloat(row.qty).toFixed(props.qtyPrecision)}</TableCell>
               <TableCell align="right">{(row.qty * row.open_ppu).toFixed(2)}</TableCell>
               <TableCell align="right">{row.converted_sell_limit_at}</TableCell>
+              <TableCell align="right">{row.closed_at}</TableCell>
             </TableRow>
           ))}
         </TableBody>
