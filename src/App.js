@@ -5,7 +5,9 @@ import OrderTable from './components/Table';
 
 function App() {
 	const [ state, setState ] = useState({
-		data: []
+		trades: [],
+		pricePrecision: "",
+		qtyPrecision: "",
 	});
 
 	const APIOrders = 'http://51.15.242.149:8585/orders?status=active';
@@ -14,7 +16,9 @@ function App() {
 		fetch(APIOrders).then((res) => res.json()).then(
 			(result) => {
 				setState((prevState) => {
-					prevState.data = result;
+					prevState.trades = result.orders;
+					prevState.pricePrecision = result.price_precision;
+					prevState.qtyPrecision = result.qty_precision;
 					return { ...prevState };
 				});
 			},
@@ -27,7 +31,14 @@ function App() {
 	return (
 		<div className="App">
 			<h1>BWD project</h1>
-			<OrderTable data={state.data} />
+			<div>
+				<h3>Active Trades</h3>
+			    <OrderTable
+					trades={state.trades}
+					pricePrecision={state.pricePrecision}
+					qtyPrecision={state.qtyPrecision}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -19,30 +19,40 @@ const useStyles = makeStyles({
 const OrderTable = (props) => {
   const classes = useStyles();
   // key={md5(JSON.stringify(row))}
+
+  const rowColor = isPublished => {
+    if (isPublished === "1") {
+      return '#CCF8EB';
+    }
+    return '#F4F7F7';
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Close PPU</TableCell>
-            <TableCell align="right">Converted sell limit</TableCell>
-            <TableCell align="right">Created at</TableCell>
-            <TableCell align="right">Open PPU</TableCell>
+            <TableCell align="right">Nr</TableCell>
+            <TableCell align="right">Create Date</TableCell>
             <TableCell align="right">Side</TableCell>
-            {/* <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
+            <TableCell align="right">Open Price</TableCell>
+            <TableCell align="right">Close Price</TableCell>
+            <TableCell align="right">Quantity</TableCell>
+            <TableCell align="right">Amount</TableCell>
+            <TableCell align="right">Convert Sell Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data.map((row) => (
-            <TableRow>
-              {/* <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell> */}
-              <TableCell align="right">{row.close_ppu}</TableCell>
-              <TableCell align="right">{row.converted_sell_limit_at}</TableCell>
+          {props.trades.map((row, i) => (
+            <TableRow style={{ 'backgroundColor': rowColor(row.is_published) }}>
+              <TableCell align="right">{i + 1}</TableCell>
               <TableCell align="right">{row.created_at}</TableCell>
-              <TableCell align="right">{row.open_ppu}</TableCell>
               <TableCell align="right">{row.side}</TableCell>
+              <TableCell align="right">{parseFloat(row.open_ppu).toFixed(props.pricePrecision)}</TableCell>
+              <TableCell align="right">{parseFloat(row.close_ppu).toFixed(props.pricePrecision)}</TableCell>
+              <TableCell align="right">{parseFloat(row.qty).toFixed(props.qtyPrecision)}</TableCell>
+              <TableCell align="right">{(row.qty * row.open_ppu).toFixed(2)}</TableCell>
+              <TableCell align="right">{row.converted_sell_limit_at}</TableCell>
             </TableRow>
           ))}
         </TableBody>
