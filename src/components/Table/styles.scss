@@ -1,3 +1,9 @@
 .MuiTableCell-alignRight {
   text-align: center !important;
 }
+
+.MuiTableCell-body {
+  p {
+    margin: 0;
+  }
+}
